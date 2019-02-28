@@ -12,6 +12,7 @@ class HashMap
 public:
 	HashMap()
 	{
+		size_map = 0;
 		log("constructor");
 	}
 	~HashMap()
@@ -49,6 +50,7 @@ private:
 	{
 		std::cout << "[" << this << "] " << msg << std::endl;
 	}
+	int size_map;
 	std::array<std::vector<std::pair<K,V>>, MAX_SIZE> data;
 };
 
@@ -63,8 +65,10 @@ int hash_function(K key)
 {
 	std::string keyToStr = to_string(key);
 	int number_hash = 0;
-	for (auto c : keyToStr) 
+	for (int i = 0; i < keyToStr.length(); i++) 
+	{
 		number_hash = number_hash + (int)c;
+	}
 	int index = number_hash % MAX_SIZE;
 	return index;
 }
@@ -79,6 +83,8 @@ void HashMap<K, V>::insert(K key, V value)
 template<typename K, typename V>
 bool HashMap<K, V>::is_empty()
 {
+	if (size_map == 0)
+		return true;
 	return false;
 }
 
