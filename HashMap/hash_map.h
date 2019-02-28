@@ -58,22 +58,21 @@ std::string to_string(const std::string& val)
 	return val;
 }
 
-template <typename K, typename V>
+template <typename K>
 int hash_function(K key)
 {
 	std::string keyToStr = to_string(key);
 	int number_hash = 0;
 	for (auto c : keyToStr) 
 		number_hash = number_hash + (int)c;
-	int index = number_hash % SIZE_MAX;
+	int index = number_hash % MAX_SIZE;
 	return index;
 }
 
 template<typename K, typename V>
 void HashMap<K, V>::insert(K key, V value)
 {
-	std::string key2string = std::to_string(key);
-	int key_index = hash_function(key2string);
+	int key_index = hash_function(key);
 	this->data[key_index].push_back({ key, value });
 }
 
