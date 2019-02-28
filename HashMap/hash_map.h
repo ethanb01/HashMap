@@ -22,7 +22,7 @@ public:
 	void insert(K key, V value);
 	bool is_empty();
 	void print();
-	V get(K key);
+	//V get(K key);
 
 
 // implement best hashing
@@ -50,15 +50,30 @@ private:
 		std::cout << "[" << this << "] " << msg << std::endl;
 	}
 	std::array<std::vector<std::pair<K,V>>, MAX_SIZE> data;
-
 };
 
+
+std::string to_string(const std::string& val)
+{
+	return val;
+}
+
+template <typename K, typename V>
+int hash_function(K key)
+{
+	std::string keyToStr = to_string(key);
+	int number_hash = 0;
+	for (auto c : keyToStr) 
+		number_hash = number_hash + (int)c;
+	int index = number_hash % SIZE_MAX;
+	return index;
+}
 
 template<typename K, typename V>
 void HashMap<K, V>::insert(K key, V value)
 {
-	// int key_index = hash(key);
-	int key_index = 0;
+	std::string key2string = std::to_string(key);
+	int key_index = hash_function(key2string);
 	this->data[key_index].push_back({ key, value });
 }
 
@@ -77,9 +92,11 @@ void HashMap<K, V>::print()
 	}*/
 }
 
-template<typename K, typename V>
-V HashMap<K, V>::get(K key)
-{
-	// int key_index = hash(key);
-	// search for key in vector: this->data[key_index]
-}
+//template<typename K, typename V>
+//V HashMap<K, V>::get(K key)
+//{
+//	// int key_index = hash(key);
+//	// search for key in vector: this->data[key_index]
+//	V value;
+//	return value;
+//}

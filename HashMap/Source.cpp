@@ -1,10 +1,12 @@
+#include <iostream>
+#include <string>
 #include "hash_map.h"
-using namespace std;
+
 
 int main(void)
 {
-	HashMap<int, int> map;
-	map.insert(1, 2);
-	cout << map.get(1) << endl; // 2
+	HashMap<std::string, int> map;
+	map.insert("one", 1);
+	//cout << map.get(1) << endl; // 2
 	map.print();
 }
